@@ -30,7 +30,7 @@
     font-weight: 400;
     width: 100%;
     max-width: 540px;
-    }
+}
 
 .h5 {
     color: var(--Neutral-Colors-Neutral-110, #515255);
@@ -44,7 +44,7 @@
 .a {
     text-decoration: none;
     cursor: pointer;
-    color: #515255;
+    color: #818388;
     font-family: Roboto;
     font-size: 16px;
     font-style: normal;
@@ -80,8 +80,21 @@
     color: #FFFFFF;
 }
 
-@media screen and (max-width: 418px) {
+@media screen and (max-width: 800px) {
     .img {
       display: none;
+    }
+    .container {
+        height: 100vh;
+        max-width: 312px;
+    }
+    .h3 {
+        font-size: 24px;
+        line-height: 24px;
+    }
+    .h5 {
+        font-size: 16px;
+        line-height: 16px;
+        padding-bottom: 16px;
     }
 }
