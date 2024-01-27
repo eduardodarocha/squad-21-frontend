@@ -1,46 +1,28 @@
-# Getting Started with Create React App
+...
+# FRONTEND Orange Portfólio - Programa de Formação v5.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+...
 
-## Available Scripts
+## Aplicação Web ReactJS criada em TypeScript
 
-In the project directory, you can run:
+Este projeto foi criado pela Squad 21, no decorrer dos 15 dias do Programa de Formação da Orange Juice. Os participantes envolvidos - Bruna Furtado, Eduardo da Rocha, Gleison Fernandes e Luisa Lopes - se dividiram entre Frontend e Backend, a fim de otimizar a programação; assim sendo, o Frontend se comunica com o Backend em um protótipo totalmente funcional. 
 
-### `npm start`
+O Orange Portfólio visa alcançar os seguintes requisitos:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Realizar o cadastro de novos usuários;
+* Permitir o login de cada um desses usuários;
+* Oferecer um servidor no qual os usuários podem fazer upload de seus portfólios dev.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Assim sendo, o Orange Portfólio como um todo é, majoritamente, um projeto de CRUD (Create, Read, Update, Delete).
 
-### `npm test`
+### Como o FRONTEND Orange Portfólio alcança esses objetivos? 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+A interface do FRONTEND Orange Portfólio foi criada com a ajuda do **ReactJS** unido ao **TypeScript**, utilizando os elementos disponíveis em **Material UI**. 
 
-### `npm run build`
+O **TypeScript** funciona mais como uma "extensão" do JavaScript que permite a escrita de códigos fortemente tipados. Isso faz com que, por exemplo, uma variável do tipo *number* não possa ser manipulada com *toUpperCase()*, visto que sua tipagem não permite a presença de maiúsculo. Você pode aprender mais sobre TypeScript e como aplicá-lo em um projeto pessoal no site oficial do framework (clicando aqui)[https://www.typescriptlang.org/].
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**ReactJS** é um framework criado pelo Facebook que visa facilitar o desenvolvimento de aplicações que contêm componentes repetidos. Dessa forma, trata-se primordialmente de um framework voltado à UI, com uma estrutura que visa unir conhecimentos em HTML, JS e CSS em um único arquivo. Devido à sua conexão com o **NodeJS**, um ambiente de criação de servidores baseado em JavaScript, sua presença fez com que o [BACKEND Orange Portfólio](https://github.com/eduardodarocha/squad-21-backend) se baseasse em NodeJS. Você pode aprender mais sobre ReactJS e como aplicá-lo em um projeto pessoal no site oficial do framework (clicando aqui)[https://react.dev/].
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Já o **Material UI** é uma biblioteca de componentes do ReactJS que tem o intuito de transformar a criação de componentes em um processo veloz e padronizado, além de ter uma aparência familiar a todos. A razão por detrás de sua familiaridade entre usuários e desenvolvedores está no fato de que é a biblioteca utilizada pelo Google!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Com a ajuda dessas três tecnologias (além do bom e velho CSS), o FRONTEND Orange Portfólio visa trazer uma experiência simples, familiar e sem dificuldades a todos os seus novos usuários. Vem criar seu portfólio dev com a gente!
