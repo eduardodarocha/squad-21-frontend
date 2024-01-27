@@ -6,6 +6,7 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import "./styles.css";
 import createNewAccount from "./validate"; 
+import "../../components/LoginRegisterCss/export";
 
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);

@@ -8,6 +8,7 @@ import validateFormLogin from "./validate";
 import "./styles.css";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { JwtPayload, jwtDecode } from "jwt-decode";
+import "../../components/LoginRegisterCss/export";
 import AlertComponent from "../../components/Alert";
 
 const Login = () => {

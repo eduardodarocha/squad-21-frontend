@@ -1,55 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-}
- 
-.container {
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    max-width: 1280px;
-    gap: 103px;
-}
-
-.img {
-    width: 100%;
-    max-width: 525px;
-}
-
-.imgContent {
-    width: 100%;
-}
-
-.h3 {
-    color: var(--Color-Brand-Primria-Primary-90, var(--Color-Brand-Primria-Primary-90, #224));
-    text-align: center;
-    font-family: Roboto;
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
-    width: 100%;
-    max-width: 540px;
-}
-
-#button:hover {
-    background-color: #CC4400;
-    color: #FFFFFF;
-}
-
 .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     gap: 35px;
-    width: 100%;
 }
 
 .formContent {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 517px;
     gap: 30px;
 }
 
@@ -82,17 +35,7 @@
 }
 
 /* RESPONSIVIDADE */
-
 @media screen and (max-width: 800px) {
-    .img {
-      display: none;
-    }
-
-    .container {
-        height: 100vh;
-        max-width: 312px;
-    }
-
     .nameSurname {
         flex-direction: column;
         justify-content: none;
@@ -107,16 +50,5 @@
 
     .fullName {
         width: 100%;
-    }
-
-    .h3 {
-        font-size: 24px;
-        line-height: 24px;
-    }
-
-    .h5 {
-        font-size: 16px;
-        line-height: 16px;
-        padding-bottom: 16px;
     }
 }
