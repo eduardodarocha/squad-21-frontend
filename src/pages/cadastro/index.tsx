@@ -1,4 +1,3 @@
-// Adicionar verificação de uma senha forte
 // Adicionar uma verificação que impeça dois usuários com o mesmo email, assim que o backend estiver pronto
 
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -27,7 +26,6 @@ const Cadastro = () => {
                 <img className="" src="assets/images/img_cadastro.png" alt="Uma mulher digita em um laptop, com um balão de código, representando assim a programação." />
             </Box>
             <Box className="form">
-                <h3 className="h3">Cadastre-se</h3>
                 <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -35,13 +33,13 @@ const Cadastro = () => {
                 >
                 {({errors, touched, handleBlur, handleChange}) => {
                     return (
-                        <Form className="form">
+                        <Form className="formContent">
                             <h3 className="h3">Cadastre-se</h3>
                             <div className="nameSurname">
                                 <TextField
                                 label="Nome"
                                 name="name"
-                                required
+                                sx={{width: 250}}
                                 error={!!errors.name && !!touched.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -51,7 +49,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Sobrenome"
                                 name="surname"
-                                required
+                                sx={{width: 250}}
                                 error={!!errors.surname && !!touched.surname}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -63,6 +61,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Email"
                                 name="email"
+                                sx={{width: 517}}
                                 required
                                 error={!!errors.email && !!touched.email}
                                 onChange={handleChange}
@@ -73,6 +72,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Password"
                                 name="password"
+                                sx={{width: 517}}
                                 required
                                 type={showPassword ? "text" : "password"}
                                 InputProps={{
