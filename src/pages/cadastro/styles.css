@@ -62,6 +62,10 @@
     gap: 1.8rem;
 }
 
+.fullName {
+    width: 250px;
+}
+
 .emailPassword {
     display: flex;
     width: 100%;
@@ -71,4 +75,48 @@
     align-items: flex-start;
     flex-shrink: 0; 
     gap: 1.5rem;
+}
+
+.credentials {
+    width: 517px;
+}
+
+/* RESPONSIVIDADE */
+
+@media screen and (max-width: 800px) {
+    .img {
+      display: none;
+    }
+
+    .container {
+        height: 100vh;
+        max-width: 312px;
+    }
+
+    .nameSurname {
+        flex-direction: column;
+        justify-content: none;
+        margin-bottom: 5.2rem;
+        max-width: 312px;
+    }
+
+    .fullName,
+    .credentials {
+        max-width: 312px;
+    }
+
+    .fullName {
+        width: 100%;
+    }
+
+    .h3 {
+        font-size: 24px;
+        line-height: 24px;
+    }
+
+    .h5 {
+        font-size: 16px;
+        line-height: 16px;
+        padding-bottom: 16px;
+    }
 }

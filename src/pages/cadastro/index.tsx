@@ -39,7 +39,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Nome"
                                 name="name"
-                                sx={{width: 250}}
+                                className="fullName"
                                 error={!!errors.name && !!touched.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -49,7 +49,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Sobrenome"
                                 name="surname"
-                                sx={{width: 250}}
+                                className="fullName"
                                 error={!!errors.surname && !!touched.surname}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -61,7 +61,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Email"
                                 name="email"
-                                sx={{width: 517}}
+                                className="credentials"
                                 required
                                 error={!!errors.email && !!touched.email}
                                 onChange={handleChange}
@@ -72,7 +72,7 @@ const Cadastro = () => {
                                 <TextField
                                 label="Password"
                                 name="password"
-                                sx={{width: 517}}
+                                className="credentials"
                                 required
                                 type={showPassword ? "text" : "password"}
                                 InputProps={{
