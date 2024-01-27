@@ -2,6 +2,8 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 import validateFormLogin from "./validate";
 import "./styles.css";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
@@ -87,7 +89,7 @@ const Login = () => {
                                 >
                                 </TextField>
                                 <Button id="button" type="submit" variant="contained" size="large" color="primary">ENTRAR</Button>
-                                <a href="" className="a">Cadastre-se</a>
+                                <Link to="/cadastro" id="cadastro">Cadastre-se</Link>
                             </Form>
                         );
                     }}
@@ -95,6 +97,6 @@ const Login = () => {
             </Box>
         </Box>
     );
-}
+} 
 
 export default Login;
