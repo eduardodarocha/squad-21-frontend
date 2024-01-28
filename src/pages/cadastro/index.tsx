@@ -10,6 +10,7 @@ import "../../components/LoginRegisterCss/export";
 
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [hasSuccess, setHasSuccess] = useState(false);
 
     const initialValues = {
         name: "",
@@ -36,11 +37,12 @@ const Cadastro = () => {
                     return (
                         <Form className="formContent">
                             <h3 className="h3">Cadastre-se</h3>
-                            <div className="nameSurname">
+                            <Box className="nameSurname">
                                 <TextField
                                 label="Nome"
                                 name="name"
                                 className="fullName"
+                                required
                                 error={!!errors.name && !!touched.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -51,14 +53,15 @@ const Cadastro = () => {
                                 label="Sobrenome"
                                 name="surname"
                                 className="fullName"
+                                required
                                 error={!!errors.surname && !!touched.surname}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 helperText={errors.surname && touched.surname && <span>{errors.surname}</span>}>
                                 </TextField>
-                            </div>
+                            </Box>
 
-                            <div className="emailPassword">
+                            <Box className="emailPassword">
                                 <TextField
                                 label="Email"
                                 name="email"
@@ -86,7 +89,7 @@ const Cadastro = () => {
                                 onBlur={handleBlur}
                                 helperText={errors.password && touched.password && <span>{errors.password}</span>}>
                                 </TextField>
-                            </div>
+                            </Box>
 
                             <Button id="button" type="submit" variant="contained" size="large" color="primary">CADASTRAR</Button>
                         </Form>

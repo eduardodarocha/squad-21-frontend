@@ -9,7 +9,7 @@ import "./styles.css";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import "../../components/LoginRegisterCss/export";
-import AlertComponent from "../../components/Alert";
+import AlertComponent from "../../components/Alert"; 
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
