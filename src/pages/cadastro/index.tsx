@@ -7,6 +7,7 @@ import { useState } from "react";
 import "./styles.css";
 import createNewAccount from "./validate"; 
 import "../../components/LoginRegisterCss/export";
+import AlertComponent from "../../components/Alert";
 
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +21,7 @@ const Cadastro = () => {
     }
 
     const handleSubmit = () => {
+        // setHasSuccess(true);
     }
 
     return (
@@ -28,6 +30,12 @@ const Cadastro = () => {
                 <img className="" src="assets/images/img_cadastro.png" alt="Uma mulher digita em um laptop, com um balão de código, representando assim a programação." />
             </Box>
             <Box className="form">
+                {hasSuccess &&
+                    <AlertComponent
+                        severity="success"
+                        title="Cadastro feito com sucesso"
+                    />
+                }
                 <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
