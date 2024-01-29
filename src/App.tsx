@@ -1,5 +1,3 @@
-import React from 'react';
-import Login from './pages/login';
 import { ThemeProvider } from '@mui/material';
 import theme from './theme';
 import SiteRouterProvider from './routes/routes'
