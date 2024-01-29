@@ -6,9 +6,12 @@ import { Form, Formik } from "formik";
 import { useState } from "react";
 import "./styles.css";
 import createNewAccount from "./validate"; 
+import "../../components/LoginRegisterCss/export";
+import AlertComponent from "../../components/Alert";
 
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [hasSuccess, setHasSuccess] = useState(false);
 
     const initialValues = {
         name: "",
@@ -18,6 +21,7 @@ const Cadastro = () => {
     }
 
     const handleSubmit = () => {
+        // setHasSuccess(true);
     }
 
     return (
@@ -26,6 +30,12 @@ const Cadastro = () => {
                 <img className="" src="assets/images/img_cadastro.png" alt="Uma mulher digita em um laptop, com um balão de código, representando assim a programação." />
             </Box>
             <Box className="form">
+                {hasSuccess &&
+                    <AlertComponent
+                        severity="success"
+                        title="Cadastro feito com sucesso"
+                    />
+                }
                 <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -35,11 +45,12 @@ const Cadastro = () => {
                     return (
                         <Form className="formContent">
                             <h3 className="h3">Cadastre-se</h3>
-                            <div className="nameSurname">
+                            <Box className="nameSurname">
                                 <TextField
                                 label="Nome"
                                 name="name"
                                 className="fullName"
+                                required
                                 error={!!errors.name && !!touched.name}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -50,14 +61,15 @@ const Cadastro = () => {
                                 label="Sobrenome"
                                 name="surname"
                                 className="fullName"
+                                required
                                 error={!!errors.surname && !!touched.surname}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 helperText={errors.surname && touched.surname && <span>{errors.surname}</span>}>
                                 </TextField>
-                            </div>
+                            </Box>
 
-                            <div className="emailPassword">
+                            <Box className="emailPassword">
                                 <TextField
                                 label="Email"
                                 name="email"
@@ -85,7 +97,7 @@ const Cadastro = () => {
                                 onBlur={handleBlur}
                                 helperText={errors.password && touched.password && <span>{errors.password}</span>}>
                                 </TextField>
-                            </div>
+                            </Box>
 
                             <Button id="button" type="submit" variant="contained" size="large" color="primary">CADASTRAR</Button>
                         </Form>
