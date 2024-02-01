@@ -1,11 +1,7 @@
-.formContent {
-    height: 300px;
-    gap: 2rem;
-}
-
 .nameSurname {
     display: flex; 
     gap: 2rem;
+    margin-bottom: 1rem;
 } 
 
 .fullName {
@@ -18,6 +14,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
+    margin-bottom: 1rem;
 }
 
 .credentials {
@@ -29,8 +26,8 @@
     .nameSurname {
         flex-direction: column;
         justify-content: none;
-        margin-bottom: 5.2rem;
         max-width: 312px;
+        margin-bottom: 1rem;
     }
 
     .fullName,
