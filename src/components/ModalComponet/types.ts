@@ -4,4 +4,5 @@ export interface ModalComponentProps {
     children?: JSX.Element;
     width: string;
     height?: string;
+    hasCloseButton?: boolean;
 }

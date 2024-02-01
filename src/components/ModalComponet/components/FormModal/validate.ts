@@ -1,10 +1,10 @@
 import {object, string} from "yup";
 
 const validateForm = object().shape({
-    title: string().required("Obrigatório"),
-    tags: string().required("Obrigatório"),
-    link: string().required("Obrigatório"),
-    descriptio: string().required("Obrigatório"),
+    title: string().required("Este campo é obrigatório"),
+    tags: string().required("Este campo é obrigatório"),
+    link: string().required("Este campo é obrigatório"),
+    description: string().required("Este campo é obrigatório"),
 });
 
 export default validateForm;
