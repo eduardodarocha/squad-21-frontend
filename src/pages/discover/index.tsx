@@ -4,7 +4,7 @@ import SelectLabels from "../../components/Select"
 import CardRenderProjeto from "../../components/CardRenderProject";
 import { otherProjectProps } from "./otherprojectdata";
 
-const Descobrir = () => {
+const Discover = () => {
     return (
         <>
             <MenuBar />
@@ -47,4 +47,4 @@ const Descobrir = () => {
         </>
     )
 }
-export default Descobrir;
+export default Discover;
