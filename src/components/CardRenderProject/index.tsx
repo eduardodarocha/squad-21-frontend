@@ -6,7 +6,7 @@ import { useState } from "react";
 const settings = ['Editar', 'Excluir'];
 
 const CardRenderProjeto = (data: ProjectProps) => {
-    const { image, avatar, author, date, tags } = data;
+    const { image, author, date, tags, hasMenu, hasTags } = data;
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -53,7 +53,7 @@ const CardRenderProjeto = (data: ProjectProps) => {
                             {date}
                         </Typography>
                     </Box>
-                    <Box sx={{ display: "flex", gap: "8px" }}>
+                    {hasTags && <Box sx={{ display: "flex", gap: "8px" }}>
                         {tags.map((item, index) =>
                             <Box key={index} sx={{ padding: "4px", borderRadius: "100px", background: "#ebebeb" }}>
                                 <Typography sx={{
@@ -67,51 +67,55 @@ const CardRenderProjeto = (data: ProjectProps) => {
                                 </Typography>
                             </Box>
                         )}
-                    </Box>
+                    </Box>}
                 </CardContent>
-                <Tooltip title="Abrir opcões do manu">
-                    <IconButton onClick={handleOpenUserMenu} sx={{
-                        display: "flex",
-                        position: "absolute",
-                        background: "#FFCC99",
-                        width: "28px",
-                        height: "28px",
-                        top: "16px",
-                        right: "16px",
-                        '&:hover': {
-                            backgroundColor: '#FFEECC',
-                        },
-                    }}>
-                        <Badge color="secondary">
-                            <Edit />
-                        </Badge>
-                    </IconButton>
-                </Tooltip>
-                <Menu
-                    sx={{ mt: '29px' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                >
-                    {settings.map((setting) => (
-                        <MenuItem
-                            sx={{ '&:hover': { backgroundColor: '#FFEECC', }, }}
-                            key={setting}
-                            onClick={handleCloseUserMenu}>
-                            <Typography textAlign="center">{setting}</Typography>
-                        </MenuItem>
-                    ))}
-                </Menu>
+                {hasMenu &&
+                    <>
+                        <Tooltip title="Abrir opcões do manu">
+                            <IconButton onClick={handleOpenUserMenu} sx={{
+                                display: "flex",
+                                position: "absolute",
+                                background: "#FFCC99",
+                                width: "28px",
+                                height: "28px",
+                                top: "16px",
+                                right: "16px",
+                                '&:hover': {
+                                    backgroundColor: '#FFEECC',
+                                },
+                            }}>
+                                <Badge color="secondary">
+                                    <Edit />
+                                </Badge>
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            sx={{ mt: '29px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+                            {settings.map((setting) => (
+                                <MenuItem
+                                    sx={{ '&:hover': { backgroundColor: '#FFEECC', }, }}
+                                    key={setting}
+                                    onClick={handleCloseUserMenu}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </>
+                }
             </Card>
         </Box>
     )

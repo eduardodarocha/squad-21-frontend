@@ -4,4 +4,6 @@ export interface ProjectProps{
     author: string;
     date: string;
     tags: string[];
+    hasMenu?: boolean;
+    hasTags?: boolean;
 }
