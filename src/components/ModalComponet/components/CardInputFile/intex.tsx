@@ -1,9 +1,36 @@
-import React, { useRef, useState } from 'react';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useContext, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Collections from '@mui/icons-material/Collections';
+import { ImageControllerContext } from '../../../../providers/imageController';
 
 interface ImageUploadCardProps {
   hasTitle?: boolean;
@@ -13,9 +40,11 @@ interface ImageUploadCardProps {
 const CardInputFile: React.FC<ImageUploadCardProps> = ({ hasTitle = true, onClick }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const { toggleImage } = useContext(ImageControllerContext);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    toggleImage(file || null);
     setSelectedFile(file || null);
   };
 
@@ -84,6 +113,7 @@ const CardInputFile: React.FC<ImageUploadCardProps> = ({ hasTitle = true, onClic
         </CardContent>
         <input
           type="file"
+          name="image"
           onChange={handleFileChange}
           accept="image/*"
           style={{ display: 'none' }}
