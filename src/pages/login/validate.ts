@@ -1,8 +1,8 @@
 import {object, string} from "yup";
 
 const validateFormLogin = object().shape({
-    email: string().required("Obrigatório"),
-    password: string().required("Obrigatório")
+    email: string().required("Este campo é obrigatório!"),
+    password: string().required("Este campo é obrigatório!")
 });
 
 export default validateFormLogin;
