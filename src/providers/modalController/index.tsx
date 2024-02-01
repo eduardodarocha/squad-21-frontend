@@ -1,5 +1,4 @@
 import { createContext, useMemo, useState } from "react";
-import { boolean } from "yup";
 import { ProviderProps } from "../types";
 
 type PropsModalControllerContext = {

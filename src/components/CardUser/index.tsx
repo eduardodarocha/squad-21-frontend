@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material"
+import ModalControllerContext from "../../providers/modalController";
 
 const CardUser = () => {
+    const {isOpen, toggle} = useContext(ModalControllerContext);
     return (
 
         <Box sx={{ display: 'flex', justifyContent: "center" }}>
@@ -21,7 +24,7 @@ const CardUser = () => {
                         </Typography>
                     </CardContent>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Button type="submit" variant="contained" size="medium" color="secondary">ADICIONAR PROJETO</Button>
+                        <Button onClick={toggle} variant="contained" size="medium" color="secondary">ADICIONAR PROJETO</Button>
                     </Box>
                 </Box>
             </Card>
