@@ -1,4 +1,4 @@
-export interface ProjectProps{
+export interface OtherProjectProps{
     title?: string,
     description?: string;
     url?: string;
@@ -7,6 +7,4 @@ export interface ProjectProps{
     author: string;
     date: string;
     tags: string[];
-    hasMenu?: boolean;
-    hasTags?: boolean;
 }

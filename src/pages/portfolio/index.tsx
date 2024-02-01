@@ -29,6 +29,8 @@ const Portfolio = () => {
                                     image={item.image}
                                     date={item.date}
                                     tags={item.tags}
+                                    hasMenu
+                                    hasTags
                                 />
                             )
                         }
