@@ -1,7 +1,7 @@
 <div align="center">
  <h1>Programa de Formação FCamara V5.0 - 2024</h1>
  <h1>Hackathon - Projeto Orange Portfólio </h1>
- <h2>Squad 21 -  Backend<h2>
+ <h2>Squad 21 -  Frontend<h2>
 </div>
 
 ## Uma página criada especialmente para hospedar o seu portfólio dev!
@@ -93,14 +93,14 @@ Assim sendo, o Orange Portfólio como um todo é, essencialmente, um projeto de 
 ````
 git clone https://github.com/eduardodarocha/squad-21-frontend.git
 
-cd squad-21-backend
+cd squad-21-frontend
 
 yarn install
 
 yarn dev
 ````
 
-#### 👨🏻‍💻 Idealizadores
+### 👨🏻‍💻 Idealizadores
 
 * Bruna Furtado, [BruFurtado](https://github.com/BruFurtado)
 * Eduardo da Rocha, [eduardodarocha](https://github.com/eduardodarocha)
