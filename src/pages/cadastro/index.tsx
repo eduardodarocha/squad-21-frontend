@@ -1,5 +1,3 @@
-// Adicionar uma verificação que impeça dois usuários com o mesmo email, assim que o backend estiver pronto
-
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
@@ -15,7 +13,7 @@ const Cadastro = () => {
 
     const initialValues = {
         name: "",
-        surname: "",
+        lastname: "",
         email: "",
         password: ""
     }
@@ -45,10 +43,11 @@ const Cadastro = () => {
                     return (
                         <Form className="formContent">
                             <h3 className="h3">Cadastre-se</h3>
-                            <Box className="nameSurname">
+                            <Box className="nameLastname">
                                 <TextField
                                 label="Nome"
                                 name="name"
+                                id="name"
                                 className="fullName"
                                 required
                                 error={!!errors.name && !!touched.name}
@@ -59,13 +58,14 @@ const Cadastro = () => {
 
                                 <TextField
                                 label="Sobrenome"
-                                name="surname"
+                                name="lastname"
+                                id="lastname"
                                 className="fullName"
                                 required
-                                error={!!errors.surname && !!touched.surname}
+                                error={!!errors.lastname && !!touched.lastname}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                helperText={errors.surname && touched.surname && <span>{errors.surname}</span>}>
+                                helperText={errors.lastname && touched.lastname && <span>{errors.lastname}</span>}>
                                 </TextField>
                             </Box>
 
