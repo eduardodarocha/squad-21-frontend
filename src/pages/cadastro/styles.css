@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 .nameLastname {
-=======
-.nameSurname {
->>>>>>> 3d483d81ceda5f56e563b783fc0f835391f1b2b4
     display: flex; 
     gap: 2rem;
     margin-bottom: 1rem;
