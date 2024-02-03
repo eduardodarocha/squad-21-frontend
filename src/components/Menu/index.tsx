@@ -116,7 +116,7 @@ function MenuBar() {
             >
               {pages.map((page, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Link to={page.to} style={{textDecoration: "none", color:"#000"}}><Typography textAlign="center">{page.labal}</Typography></Link>
+                  <Link to={page.to} style={{ textDecoration: "none", color: "#000" }}><Typography textAlign="center">{page.labal}</Typography></Link>
                 </MenuItem>
               ))}
             </Menu>
