@@ -6,7 +6,8 @@ import "./styles.css";
 import createNewAccount from "./validate";
 import "../../components/LoginRegisterCss/export";
 import AlertComponent from "../../components/Alert";
-import api from "../../api/api";
+// import api from "../../api/api";
+import { Api } from "../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 
 
@@ -30,7 +31,7 @@ const Cadastro = () => {
 
   async function createUser(values: any) {
     try {
-      const response: AxiosResponse = await api.post("/users", values);
+      const response: AxiosResponse = await Api.post("/users", values);
       setUser(response.data);
       setIsActionSuccessful(true);
       setMessageError("");
