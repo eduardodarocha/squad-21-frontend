@@ -3,6 +3,9 @@ import { getUserLocalStorage } from "../providers/AuthProvider/utils";
 
 export const Api = axios.create({
     baseURL: "http://localhost:3333/",
+    headers: {
+        "Content-Type": "application/json",
+      },
 });
 
 Api.interceptors.request.use(
