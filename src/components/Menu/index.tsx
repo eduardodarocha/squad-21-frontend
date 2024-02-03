@@ -15,6 +15,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import theme from '../../theme';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../providers/AuthProvider/useAuth';
+import { Divider, ListItemIcon } from '@mui/material';
+import { Logout } from '@mui/icons-material';
 
 const pages = [
   {
@@ -24,15 +27,16 @@ const pages = [
   {
     labal: 'Descobrir',
     to: '/Descobrir'
-  }
+  },
 ];
 
 /*const pages = ['Meus projetos', 'Descobrir', 'Configurações'];*/
-const settings = ['Logout'];
+const settings = ['Sair'];
 
 function MenuBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const auth = useAuth();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -47,6 +51,10 @@ function MenuBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    auth.logout();
   };
 
   const handleClickNavMenu = (index: number) => {
@@ -114,11 +122,23 @@ function MenuBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              <MenuItem sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }} onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">{auth.name}</Typography>
+                <p>{auth.email}</p>
+              </MenuItem>
+              <Divider />
               {pages.map((page, index) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Link to={page.to} style={{textDecoration: "none", color:"#000"}}><Typography textAlign="center">{page.labal}</Typography></Link>
+                  <Typography component="a" href={page.to} textAlign="center" sx={{ textDecoration: 'none' }}>{page.labal}</Typography>
                 </MenuItem>
               ))}
+              <Divider />
+              <MenuItem onClick={handleCloseNavMenu}>
+                <ListItemIcon>
+                  <Logout fontSize="small" />
+                </ListItemIcon>
+                <Typography onClick={handleLogout} textAlign="center">Sair</Typography>
+              </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -155,7 +175,7 @@ function MenuBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title={`Olá ${auth.name}`}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="../assets/images/avatar40.png" />
               </IconButton>
@@ -187,7 +207,7 @@ function MenuBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography onClick={handleLogout} textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>

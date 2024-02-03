@@ -1,7 +1,7 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 import validateFormLogin from "./validate";
@@ -9,21 +9,34 @@ import "./styles.css";
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import "../../components/LoginRegisterCss/export";
-import AlertComponent from "../../components/Alert"; 
+import AlertComponent from "../../components/Alert";
+import { useAuth } from "../../providers/AuthProvider/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [userGoogle, setUserGoogle] = useState<JwtPayload>();
     const [hasError, setHasError] = useState(false);
+    const auth = useAuth();
+    const navigate = useNavigate();
 
     const initialValues = {
         email: "",
         password: ""
     }
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async (values: { email: string, password: string }) => {
+        try {
+            await auth.authenticate(values.email, values.password);
+            navigate("/portfolio");
+        } catch (error) {
+            setHasError(true);
+        }
     }
+
+    useEffect(() => {
+        auth.token && navigate("/portfolio")
+    }, [auth.token])
 
     return (
         <Box className="container">
@@ -98,6 +111,6 @@ const Login = () => {
             </Box>
         </Box>
     );
-} 
+}
 
 export default Login;

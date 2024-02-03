@@ -1,4 +1,4 @@
-.nameSurname {
+.nameLastname {
     display: flex; 
     gap: 2rem;
     margin-bottom: 1rem;
@@ -23,7 +23,7 @@
 
 /* RESPONSIVIDADE */
 @media screen and (max-width: 800px) {
-    .nameSurname {
+    .nameLastname {
         flex-direction: column;
         justify-content: none;
         max-width: 312px;

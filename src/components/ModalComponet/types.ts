@@ -5,4 +5,6 @@ export interface ModalComponentProps {
     width: string;
     height?: string;
     hasCloseButton?: boolean;
+    hasBorderRadius?: boolean;
+    bottom?: number;
 }
