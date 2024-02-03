@@ -2,7 +2,7 @@ import { Collections } from "@mui/icons-material"
 import { Box, Card, Typography } from "@mui/material"
 import { CardAddProjetoProps } from "./types";
 
-const CardAddProjeto = ({hasTitle, onClick}: CardAddProjetoProps) => {
+const CardAddProjeto = ({ hasTitle, onClick }: CardAddProjetoProps) => {
     return (
         <Box sx={{ display: "flex" }}>
             <Card
@@ -15,11 +15,16 @@ const CardAddProjeto = ({hasTitle, onClick}: CardAddProjetoProps) => {
                     borderRadius: "4px",
                     background: "#E6E9F2",
                     fontFamily: "Roboto",
+                    width: "100%",
                     maxWidth: "389px",
                     padding: "68px 59px 68px 60px",
                     justifyContent: "center",
                     alignItems: 'center',
-                    gap: '16px'
+                    gap: '16px',
+                    '@media (max-width: 800px)': {
+                        maxWidth: "312px",
+                        padding: "62px 21px"
+                    }
                 }}
                 onClick={onClick}>
                 <Collections sx={{ width: '46px', height: '46px' }} />

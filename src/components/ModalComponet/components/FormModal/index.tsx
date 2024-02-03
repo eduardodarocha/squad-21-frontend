@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, useMediaQuery } from "@mui/material";
 import { Form, Formik } from "formik";
 import validateForm from "./validate";
 import theme from "../../../../theme";
@@ -12,13 +12,12 @@ import PreviewContent from "../PreviewContent";
 import { projectsData } from "../../../CardRenderProject/projectData";
 import { ImageControllerContext } from "../../../../providers/imageController";
 
-
 const FormModal = () => {
     const { toggle, isOpen } = useContext(ModalControllerContext);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
     const [isSaved, setIsSaved] = useState(false);
     const [isPreviewContent, setPreviewContent] = useState(false);
-     const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("");
     const [tags, setTags] = useState("");
     const [link, setLink] = useState("");
     const [description, setDescription] = useState("");
@@ -26,7 +25,7 @@ const FormModal = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
+            setIsMobile(window.innerWidth <= 800);
         };
 
         window.addEventListener('resize', handleResize);
@@ -44,19 +43,8 @@ const FormModal = () => {
     }
 
     const handleSubmit = (values: any) => {
-        console.log('title', title);
-        console.log('tags', tags);
-        console.log('link', link);
-        console.log('description', description);
-        console.log('image', image);
-        
-        
-        
-        
         setIsSaved(true);
     }
-
-    
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -72,7 +60,7 @@ const FormModal = () => {
                                 <MessageModal title="Projeto adicionado com sucesso!" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} />
                             </ModalComponent>}
                             {isPreviewContent &&
-                                <ModalComponent open={isOpen} onClose={toggle} width="1042px" height="680px" hasCloseButton>
+                                <ModalComponent open={isOpen} onClose={toggle} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={0} hasCloseButton hasBorderRadius>
                                     <Box>
                                         {projectsData.length > 0 && (
                                             <PreviewContent
@@ -84,14 +72,20 @@ const FormModal = () => {
                                                 description={description!}
                                                 url={link}
                                                 tags={tags}
-                                                width="838px"
+                                                width={isMobile ? '308px' : '838px'}
                                             />
                                         )}
                                     </Box>
 
 
                                 </ModalComponent>}
-                            <Box sx={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                            <Box sx={{
+                                display: "flex",
+                                flexDirection: "column", gap: "24px", width: "100%",
+                                '@media (max-width: 800px)': {
+                                    maxWidth: "266px",
+                                }
+                            }}>
                                 <Typography sx={{ fontSize: "24px" }}>Adicionar projeto</Typography>
 
                                 <Box sx={{ display: "flex", gap: "16px", flexDirection: isMobile ? "column" : "row" }}>

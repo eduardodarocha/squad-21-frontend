@@ -1,29 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useContext, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -66,11 +40,14 @@ const CardInputFile: React.FC<ImageUploadCardProps> = ({ hasTitle = true, onClic
           borderRadius: "4px",
           background: selectedFile ? 'white' : "#E6E9F2",
           fontFamily: "Roboto",
-          width: '389px',   
+          width: '389px',
           justifyContent: "center",
           alignItems: 'center',
           gap: '16px',
           overflow: 'hidden',
+          '@media (max-width: 800px)': {
+            maxWidth: "266px",
+          }
         }}
         onClick={handleCardClick}
       >
@@ -104,7 +81,13 @@ const CardInputFile: React.FC<ImageUploadCardProps> = ({ hasTitle = true, onClic
                     Adicione seu primeiro projeto
                   </Typography>
                 )}
-                <Typography sx={{ fontSize: 14, width: 270 }} color="text.secondary">
+                <Typography sx={{
+                  fontSize: 14,
+                  width: 270,
+                  '@media (max-width: 800px)': {
+                    maxWidth: "249px",
+                  }
+                }} color="text.secondary">
                   Compartilhe seu talento com milhares de pessoas
                 </Typography>
               </Box>

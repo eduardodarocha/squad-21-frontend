@@ -26,36 +26,55 @@ const CardRenderProjeto = (data: ProjectProps) => {
                     flexDirection: "column",
                     borderRadius: "4px",
                     fontFamily: "Roboto",
+                    width: "100%",
                     maxWidth: "389px",
                     justifyContent: "center",
-                    gap: '8px'
+                    gap: '8px',
+                    '@media (max-width: 800px)': {
+                        maxWidth: "312px",
+                    }
                 }}>
 
                 <img src={image} />
                 <CardContent sx={{ display: "flex", padding: 0, justifyContent: "space-between" }}>
                     <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
                         <Avatar sx={{ width: "24px", height: "24px" }} alt="C" src=" " />
-                        <Typography sx={{
-                            fontFamily: "Roboto",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: "400",
+                        <Box sx={{
+                            display: "flex", gap: "8px", alignItems: "center",
+                            '@media (max-width: 800px)': {
+                                flexDirection: "column",
+                                justifyContent: "flex-start",
+                                alignItems: "flex-start",
+                                gap: 0
+                            }
                         }}>
-                            {author}
-                        </Typography>
-                        <Box sx={{ width: "5px", height: "5px", borderRadius: "50%", background: "#515255" }} />
-                        <Typography sx={{
-                            fontFamily: "Roboto",
-                            fontSize: "16px",
-                            fontStyle: "normal",
-                            fontWeight: "400",
-                        }}>
-                            {date}
-                        </Typography>
+                            <Typography sx={{
+                                fontFamily: "Roboto",
+                                fontSize: "16px",
+                                fontStyle: "normal",
+                                fontWeight: "400",
+                            }}>
+                                {author}
+                            </Typography>
+                            <Box sx={{
+                                width: "5px", height: "5px", borderRadius: "50%", background: "#515255",
+                                '@media (max-width: 800px)': {
+                                    display: "none"
+                                }
+                            }} />
+                            <Typography sx={{
+                                fontFamily: "Roboto",
+                                fontSize: "16px",
+                                fontStyle: "normal",
+                                fontWeight: "400",
+                            }}>
+                                {date}
+                            </Typography>
+                        </Box>
                     </Box>
                     {hasTags && <Box sx={{ display: "flex", gap: "8px" }}>
                         {tags.map((item, index) =>
-                            <Box key={index} sx={{ padding: "4px", borderRadius: "100px", background: "#ebebeb" }}>
+                            <Box key={index} sx={{ display: "flex", padding: "4px", borderRadius: "100px", background: "#ebebeb", alignItems: "center", justifyContent: "center", width: "37px", height: "32px" }}>
                                 <Typography sx={{
                                     padding: "3px 6px",
                                     fontFamily: "Roboto",
