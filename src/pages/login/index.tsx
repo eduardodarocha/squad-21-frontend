@@ -1,7 +1,7 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, IconButton, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 import validateFormLogin from "./validate";
@@ -33,6 +33,10 @@ const Login = () => {
             setHasError(true);
         }
     }
+
+    useEffect(() => {
+        auth.token && navigate("/portfolio")
+    }, [auth.token])
 
     return (
         <Box className="container">
