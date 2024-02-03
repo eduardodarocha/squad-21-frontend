@@ -15,7 +15,12 @@ export default function SelectLabels() {
 
   return (
     <Box>
-      <FormControl sx={{ width: "100%", maxWidth: "513px" }}>
+      <FormControl sx={{
+        width: "100%", maxWidth: "513px",
+        '@media (max-width: 800px)': {
+          maxWidth: "312px",
+        }
+      }}>
         <InputLabel id="demo-simple-select-helper-label">Buscar tags</InputLabel>
         <Select
           labelId="demo-simple-select-helper-label"

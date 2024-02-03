@@ -8,7 +8,13 @@ const Discover = () => {
     return (
         <>
             <MenuBar />
-            <Box sx={{ display: 'flex', flexDirection: "column", gap: '120px', width: "100%", maxWidth: "1280px", margin: " 112px auto " }}>
+            <Box sx={{
+                display: 'flex', flexDirection: "column", gap: '120px', width: "100%", maxWidth: "1280px", margin: " 112px auto ",
+                '@media (max-width: 800px)': {
+                    margin: "32px auto",
+                    gap: "32px"
+                },
+            }}>
                 <Box sx={{ display: 'flex', justifyContent: "center" }}>
                     <Typography
                         sx={{
@@ -21,6 +27,9 @@ const Discover = () => {
                             fontWeight: '400',
                             lineHeight: '34px',
                             color: '#222244',
+                            '@media (max-width: 800px)': {
+                                fontSize: '24px',
+                            },
                         }}
                     >
                         Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões inesquecíveis
