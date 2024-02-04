@@ -2,7 +2,7 @@ import axios from "axios";
 import { getUserLocalStorage } from "../providers/AuthProvider/utils";
 
 export const Api = axios.create({
-    baseURL: "http://localhost:3333/",
+    baseURL: "https://api.eduardorocha.dev/",
     headers: {
         "Content-Type": "application/json",
       },
@@ -12,7 +12,7 @@ Api.interceptors.request.use(
     (config) => {
         const user = getUserLocalStorage();
 
-        config.headers.Authorization = user?.token;
+        config.headers.Authorization = `Bearer ${user?.token}`;
 
         return config;
     },
