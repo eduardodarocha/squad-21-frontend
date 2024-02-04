@@ -6,7 +6,7 @@ import ModalControllerContext from "../../providers/modalController";
 
 const ModalComponent = ({ open, onClose, children, width, height, hasCloseButton, hasBorderRadius, bottom }: ModalComponentProps) => {
     const { toggle } = useContext(ModalControllerContext);
-
+ 
     return (
 
         <Modal
@@ -46,7 +46,6 @@ const ModalComponent = ({ open, onClose, children, width, height, hasCloseButton
             </Box>
         </Modal>
     )
-
 }
 
 export default ModalComponent;

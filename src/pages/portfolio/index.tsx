@@ -9,10 +9,15 @@ import { useContext, useState, useEffect } from "react";
 import ModalComponent from "../../components/ModalComponet";
 import FormModal from "../../components/ModalComponet/components/FormModal";
 import ModalControllerContext, { } from "../../providers/modalController";
-
+import { useAuth } from "../../providers/AuthProvider/useAuth";
+import axios from "axios";
+ 
 const Portfolio = () => {
     const { isOpen, toggle } = useContext(ModalControllerContext);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
+    const [projectData, setProjectData] = useState([]);
+    const [newProject, setNewProject] = useState([]);
+    const auth = useAuth();
 
     useEffect(() => {
         const handleResize = () => {
@@ -25,6 +30,7 @@ const Portfolio = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
     return (
         <>
             <MenuBar />

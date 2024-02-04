@@ -1,15 +1,16 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, IconButton, TextField } from "@mui/material";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikValues } from "formik";
 import { useState } from "react";
 import "./styles.css";
 import createNewAccount from "./validate"; 
 import "../../components/LoginRegisterCss/export";
 import AlertComponent from "../../components/Alert";
+import axios from "axios";
 
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [hasSuccess, setHasSuccess] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     const initialValues = {
         name: "",
@@ -18,8 +19,14 @@ const Cadastro = () => {
         password: ""
     }
 
-    const handleSubmit = () => {
-        // setHasSuccess(true);
+    const handleSubmit = (values: FormikValues) => {
+        axios.post("http://localhost:3333/", values)
+        .then(response => {
+            console.log(response.status);
+        }).catch(error => {
+            console.error(error);
+            setHasError(true);
+        });
     }
 
     return (
@@ -28,11 +35,9 @@ const Cadastro = () => {
                 <img className="" src="assets/images/img_cadastro.png" alt="Uma mulher digita em um laptop, com um balão de código, representando assim a programação." />
             </Box>
             <Box className="form">
-                {hasSuccess &&
-                    <AlertComponent
-                        severity="success"
-                        title="Cadastro feito com sucesso"
-                    />
+                {hasError ? 
+                <AlertComponent severity="error" title="Falha ao efetuar o cadastro!" /> : 
+                <AlertComponent severity="success" title="Cadastro efetuado com sucesso!" />
                 }
                 <Formik
                 initialValues={initialValues}
