@@ -1,12 +1,11 @@
 import { Edit } from "@mui/icons-material"
-import { Avatar, Badge, Box, Card, CardActions, CardContent, CardMedia, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material"
+import { Avatar, Badge, Box, Card, CardContent, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material"
 import { ProjectProps } from "../../pages/portfolio/types";
 import { useState } from "react";
 
 const settings = ['Editar', 'Excluir'];
 
 const CardRenderProjeto = (data: ProjectProps) => {
-    const { image, author, date, tags, hasMenu, hasTags } = data;
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -15,6 +14,7 @@ const CardRenderProjeto = (data: ProjectProps) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
     return (
         <Box sx={{ display: "flex" }}>
             <Card
@@ -35,10 +35,10 @@ const CardRenderProjeto = (data: ProjectProps) => {
                     }
                 }}>
 
-                <img src={image} />
+                <img src={data.image} />
                 <CardContent sx={{ display: "flex", padding: 0, justifyContent: "space-between" }}>
                     <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                        <Avatar sx={{ width: "24px", height: "24px" }} alt="C" src=" " />
+                        <Avatar sx={{ width: "24px", height: "24px" }} alt="Avatar" src="./assets/images/avatar.png" />
                         <Box sx={{
                             display: "flex", gap: "8px", alignItems: "center",
                             '@media (max-width: 800px)': {
@@ -54,7 +54,7 @@ const CardRenderProjeto = (data: ProjectProps) => {
                                 fontStyle: "normal",
                                 fontWeight: "400",
                             }}>
-                                {author}
+                                {data.author}
                             </Typography>
                             <Box sx={{
                                 width: "5px", height: "5px", borderRadius: "50%", background: "#515255",
@@ -68,27 +68,25 @@ const CardRenderProjeto = (data: ProjectProps) => {
                                 fontStyle: "normal",
                                 fontWeight: "400",
                             }}>
-                                {date}
+                                {data.date}
                             </Typography>
                         </Box>
                     </Box>
-                    {hasTags && <Box sx={{ display: "flex", gap: "8px" }}>
-                        {tags.map((item, index) =>
-                            <Box key={index} sx={{ display: "flex", padding: "4px", borderRadius: "100px", background: "#ebebeb", alignItems: "center", justifyContent: "center", width: "37px", height: "32px" }}>
-                                <Typography sx={{
-                                    padding: "3px 6px",
-                                    fontFamily: "Roboto",
-                                    fontSize: "13px",
-                                    fontStyle: "normal",
-                                    fontWeight: "400",
-                                }}>
-                                    {item}
-                                </Typography>
-                            </Box>
-                        )}
-                    </Box>}
+                    {data.tags !== "undefined" &&
+                        <Box sx={{ display: "flex", padding: "4px", borderRadius: "100px", background: "#ebebeb", alignItems: "center", justifyContent: "center", width: "37px", height: "32px" }}>
+                            <Typography sx={{
+                                padding: "3px 6px",
+                                fontFamily: "Roboto",
+                                fontSize: "13px",
+                                fontStyle: "normal",
+                                fontWeight: "400",
+                            }}>
+                                {data.tags}
+                            </Typography>
+                        </Box>
+                    }
                 </CardContent>
-                {hasMenu &&
+                {data.hasMenu &&
                     <>
                         <Tooltip title="Abrir opcões do manu">
                             <IconButton onClick={handleOpenUserMenu} sx={{
