@@ -6,11 +6,13 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { itemData } from './itemData';
 import { Box } from '@mui/material';
 
-export default function SelectLabels() {
+export default function SelectLabels({ onSelectChange }: { onSelectChange: (value: string) => void }) {
   const [item, setItem] = useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
-    setItem(event.target.value);
+    const selectedValue = event.target.value;
+    setItem(selectedValue);
+    onSelectChange(selectedValue);
   };
 
   return (

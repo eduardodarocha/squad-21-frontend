@@ -9,7 +9,7 @@ export const projectsData: ProjectProps[] = [
       "image": "assets/images/landingpage.png",
       "author": "Camila Soares",
       "date": "06/2023",
-      "tags": ["Dev", "UX"]
+      "tags": "ux"
     },
     {
       "title": "Ecommerce Orange",
@@ -19,7 +19,7 @@ export const projectsData: ProjectProps[] = [
       "image": "assets/images/landingpage.png",
       "author": "Camila Soares",
       "date": "11/2023",
-      "tags": ["Dev", "Web"]
+      "tags": "ux"
     },
     {
       "title": "Ecommerce Orange",
@@ -29,7 +29,7 @@ export const projectsData: ProjectProps[] = [
       "image": "../../../assets/images/landingpage.png",
       "author": "Camila Soares",
       "date": "01/2024",
-      "tags": ["UX", "Web"]
+      "tags": "ux"
     },
     {
       "title": "Ecommerce Orange",
@@ -39,7 +39,7 @@ export const projectsData: ProjectProps[] = [
       "image": "../../../assets/images/landingpage.png",
       "author": "Camila Soares",
       "date": "01/2024",
-      "tags": ["UX", "Dev", "Web"]
+      "tags": "ux"
     }
   ]
   
