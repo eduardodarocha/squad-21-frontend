@@ -11,11 +11,14 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PreviewContent from "../PreviewContent";
 import { projectsData } from "../../../CardRenderProject/projectData";
 import { ImageControllerContext } from "../../../../providers/imageController";
+import { RegisterProjects } from "../../../../services/portfolio";
+import { Close, StopCircle } from "@mui/icons-material";
 
 const FormModal = () => {
     const { toggle, isOpen } = useContext(ModalControllerContext);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
     const [isSaved, setIsSaved] = useState(false);
+    const [error, setError] = useState(false);
     const [isPreviewContent, setPreviewContent] = useState(false);
     const [title, setTitle] = useState("");
     const [tags, setTags] = useState("");
@@ -40,11 +43,32 @@ const FormModal = () => {
         tags: "",
         link: "",
         description: "",
+        file: null,
     }
 
-    const handleSubmit = (values: any) => {
-        setIsSaved(true);
-    }
+    const handleSubmit = async (values: any) => {
+        const data = new FormData();
+        data.append('title', values.title);
+        data.append('tags', values.tags);
+        data.append('link', values.link);
+        data.append('description', values.description);
+
+        if (image) {
+            data.append('file', image);
+
+            try {
+                const response = await RegisterProjects(data);
+
+                if (response) {
+                    setIsSaved(true);
+                }
+
+            } catch (error) {
+                setError(true);
+            }
+        } else {
+        }
+    };
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -58,6 +82,9 @@ const FormModal = () => {
                         <Form>
                             {isSaved && <ModalComponent open={isOpen} onClose={toggle} width="300px">
                                 <MessageModal title="Projeto adicionado com sucesso!" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} />
+                            </ModalComponent>}
+                            {error && <ModalComponent open={isOpen} onClose={toggle} width="300px">
+                                <MessageModal title="Erro ao adicionar projeto!" icon={<Close sx={{ color: theme.palette.error.main }} />} />
                             </ModalComponent>}
                             {isPreviewContent &&
                                 <ModalComponent open={isOpen} onClose={toggle} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={0} hasCloseButton hasBorderRadius>

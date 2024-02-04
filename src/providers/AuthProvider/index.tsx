@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             email,
             name: response.userSession.name,
             lastname: response.userSession.lastname,
-            idUser: response.userSession.id,
+            id: response.userSession.id,
 
         }
 
