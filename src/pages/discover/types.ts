@@ -6,5 +6,5 @@ export interface OtherProjectProps{
     image: string;
     author: string;
     date: string;
-    tags: string[];
+    tags: string;
 }

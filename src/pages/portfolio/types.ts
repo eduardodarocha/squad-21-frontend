@@ -6,7 +6,7 @@ export interface ProjectProps{
     image: string;
     author: string;
     date: string;
-    tags: string[];
+    tags: string;
     hasMenu?: boolean;
     hasTags?: boolean;
 }

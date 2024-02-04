@@ -36,7 +36,7 @@ const Discover = () => {
                     </Typography>
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: "column", gap: "40px", marginLeft: "32px" }}>
-                    <SelectLabels />
+                   
                     <Box sx={{ display: "flex", gap: "24px", flexWrap: "wrap", cursor: "pointer" }}>
                         {otherProjectProps.length &&
                             otherProjectProps.map((item, index) =>
