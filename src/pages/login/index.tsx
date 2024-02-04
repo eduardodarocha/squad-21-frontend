@@ -12,6 +12,15 @@ import "../../components/LoginRegisterCss/export";
 import AlertComponent from "../../components/Alert";
 import { useAuth } from "../../providers/AuthProvider/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Api } from "../../services/api";
+import { AxiosError, AxiosResponse } from "axios";
+
+interface TokenPayload {
+    email: string
+    sub: string
+    given_name: string
+    family_name: string
+}
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +33,7 @@ const Login = () => {
         email: "",
         password: ""
     }
+
 
     const handleSubmit = async (values: { email: string, password: string }) => {
         try {
@@ -55,9 +65,33 @@ const Login = () => {
                 <GoogleOAuthProvider clientId="629205010386-8pvfusp9ua143ld1d3k1nak7s099qbv9.apps.googleusercontent.com">
                     <GoogleLogin
                         onSuccess={credentialResponse => {
+                            async function createUser(values: any) {
+                                try {
+                                    const response: AxiosResponse = await Api.post("/users", values);
+                                    //   setUser(response.data);
+                                    //   setIsActionSuccessful(true);
+                                    //   setMessageError("");
+                                } catch (error: AxiosError | any) {
+                                    //   setIsActionSuccessful(null);
+                                    //   setMessageError(error.response.data.message);
+                                }
+                            }
+
                             if (credentialResponse.credential) {
-                                var decoded = jwtDecode(credentialResponse.credential);
-                                setUserGoogle(decoded);
+                                // var decoded = jwtDecode(credentialResponse.credential);
+                                const dataFromJWT = jwtDecode<TokenPayload>(credentialResponse.credential);
+                                setUserGoogle(dataFromJWT);
+                                console.log(dataFromJWT);
+                                const values = {
+                                    email: dataFromJWT.email,
+                                    password: dataFromJWT.sub,
+                                    name: dataFromJWT.given_name,
+                                    lastname: dataFromJWT.family_name,
+                                };
+                                createUser(values)
+                                //    handleSubmit({ email: dataFromJWT.email, password: dataFromJWT.sub });
+
+
                             }
                         }}
                         onError={() => {

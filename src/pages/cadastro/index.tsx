@@ -10,10 +10,11 @@ import AlertComponent from "../../components/Alert";
 import { Api } from "../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 
-
 const Cadastro = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isActionSuccessful, setIsActionSuccessful] = useState<boolean | null>(null);
+  const [isActionSuccessful, setIsActionSuccessful] = useState<boolean | null>(
+    null
+  );
   const [messageError, setMessageError] = useState("");
   const [user, setUser] = useState();
   const initialValues = {
@@ -36,20 +37,9 @@ const Cadastro = () => {
       setIsActionSuccessful(true);
       setMessageError("");
     } catch (error: AxiosError | any) {
-      setIsActionSuccessful(null)
+      setIsActionSuccessful(null);
       setMessageError(error.response.data.message);
     }
-    // api
-    //   .post("/users", values)
-    //   .then((response) => {
-    //     setUser(response.data);
-    //     setIsActionSuccessful(true);
-    //     setMessageError("");
-    //   })
-    //   .catch((error) => {
-    //     setIsActionSuccessful(null)
-    //     setMessageError(error.response.data.message);
-    //   });
   }
 
   return (
@@ -69,13 +59,10 @@ const Cadastro = () => {
           />
         )}
         {messageError && (
-          <AlertComponent
-            severity="error"
-            title={messageError}
-          />
+          <AlertComponent severity="error" title={messageError} />
         )}
 
-        {(isActionSuccessful === false) && (
+        {isActionSuccessful === false && (
           <AlertComponent
             severity="error"
             title="Falha ao efetuar o cadastro!"
@@ -90,10 +77,7 @@ const Cadastro = () => {
         >
           {({ values, errors, touched, handleBlur, handleChange }) => {
             return (
-              <Form
-                className="formContent"
-                onSubmit={formik.handleSubmit}
-              >
+              <Form className="formContent" onSubmit={formik.handleSubmit}>
                 <h3 className="h3">Cadastre-se</h3>
                 <Box className="nameSurname">
                   <TextField
