@@ -3,6 +3,7 @@ export interface UserProps {
     token?: string;
     name?: string;
     lastname?: string;
+    id?: string;
 }
 
 export interface ContextProps extends UserProps {
