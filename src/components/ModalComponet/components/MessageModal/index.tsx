@@ -1,12 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import { MessageModalProps } from "./types";
-import { useContext } from "react";
-import ModalControllerContext from "../../../../providers/modalController";
 import theme from "../../../../theme";
 
 const MessageModal = ({ title, action, icon, hasAction, onConfirm, onCancel }: MessageModalProps) => {
-    const { toggle } = useContext(ModalControllerContext);
-
     return (
         <Box
             sx={{
@@ -40,7 +36,11 @@ const MessageModal = ({ title, action, icon, hasAction, onConfirm, onCancel }: M
                         }
                     }}
                 >Cancelar</Button>
-            </Box>) : <Button id="button" type="submit" variant="contained" size="large" color="primary" onClick={toggle}>VOLTAR PARA PROJETOS</Button>}
+            </Box>) : <Button id="button" type="submit" variant="contained" size="large" color="primary" onClick={() => {
+                if (onCancel) {
+                    onCancel();
+                }
+            }}>VOLTAR PARA PROJETOS</Button>}
 
         </Box>
     )

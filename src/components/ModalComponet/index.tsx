@@ -4,8 +4,11 @@ import { Close } from "@mui/icons-material";
 import { useContext } from "react";
 import ModalControllerContext from "../../providers/modalController";
 
-const ModalComponent = ({ open, onClose, children, width, height, hasCloseButton, hasBorderRadius, bottom }: ModalComponentProps) => {
-    const { toggle } = useContext(ModalControllerContext);
+const ModalComponent = ({ open, onClose, children, width, height, hasCloseButton, hasBorderRadius, bottom }: ModalComponentProps) => {  const { toggle } = useContext(ModalControllerContext);
+
+    const handleClose = () => {
+        onClose(open);
+    };
 
     return (
 
@@ -38,7 +41,7 @@ const ModalComponent = ({ open, onClose, children, width, height, hasCloseButton
             }}>
                 {hasCloseButton &&
                     <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                        <Close sx={{ cursor: "pointer" }} onClick={toggle} />
+                        <Close sx={{ cursor: "pointer" }} onClick={handleClose} />
                     </Box>
                 }
 

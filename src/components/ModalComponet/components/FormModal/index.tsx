@@ -10,15 +10,17 @@ import MessageModal from "../MessageModal";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PreviewContent from "../PreviewContent";
 import { ImageControllerContext } from "../../../../providers/imageController";
-import { RegisterProjects } from "../../../../services/portfolio";
+import { RegisterProjects, UpdateProjects } from "../../../../services/portfolio";
 import { Close } from "@mui/icons-material";
 import { useAuth } from "../../../../providers/AuthProvider/useAuth";
 import { formatMonthYear } from "../../../../utils";
+import { FormModalProps } from "./types";
 
-const FormModal = () => {
+const FormModal = ({ mode, projectData, id }: FormModalProps) => {
     const { toggle, isOpen } = useContext(ModalControllerContext);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
     const [isSaved, setIsSaved] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(false);
     const [error, setError] = useState(false);
     const [isPreviewContent, setPreviewContent] = useState(false);
     const [title, setTitle] = useState("");
@@ -60,10 +62,18 @@ const FormModal = () => {
             data.append('file', image);
 
             try {
-                const response = await RegisterProjects(data);
+                if (mode === 'create') {
+                    const response = await RegisterProjects(data);
 
-                if (response) {
-                    setIsSaved(true);
+                    if (response) {
+                        setIsSaved(true);
+                        toggle();
+                    }
+                } else {
+                    if (id) {
+                        const response = await UpdateProjects(data, id);
+                        setIsUpdated(true);
+                    }
                 }
 
             } catch (error) {
@@ -71,11 +81,11 @@ const FormModal = () => {
             }
         }
     };
-
     return (
         <Box sx={{ width: "100%" }}>
             <Formik
                 initialValues={initialValues}
+                enableReinitialize
                 onSubmit={handleSubmit}
                 validationSchema={validateForm}
             >
@@ -85,11 +95,14 @@ const FormModal = () => {
                             {isSaved && <ModalComponent open={isOpen} onClose={toggle} width="300px" bottom={300}>
                                 <MessageModal title="Projeto adicionado com sucesso!" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} />
                             </ModalComponent>}
+                            {isUpdated && <ModalComponent open={isUpdated} onClose={() => setIsUpdated(false)} width="300px" bottom={300}>
+                                <MessageModal title="Projeto atualizado com sucesso!" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} />
+                            </ModalComponent>}
                             {error && <ModalComponent open={error} onClose={() => setError(false)} width="300px" bottom={300}>
                                 <MessageModal title="Erro ao adicionar projeto!" icon={<Close sx={{ color: theme.palette.error.main }} />} />
                             </ModalComponent>}
                             {isPreviewContent &&
-                                <ModalComponent open={isOpen} onClose={toggle} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={isMobile ? 0 : 40} hasCloseButton hasBorderRadius>
+                                <ModalComponent open={isPreviewContent} onClose={() => setPreviewContent(false)} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={isMobile ? 0 : 40} hasCloseButton hasBorderRadius>
                                     <Box>
                                         {auth.name && (
                                             <PreviewContent
@@ -146,11 +159,12 @@ const FormModal = () => {
                                             error={!!errors.title && !!touched.title}
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                setTitle(e.target.value)
+                                                setTitle(mode === "edit" ? e.target.defaultValue : e.target.value)
                                             }}
                                             onBlur={handleBlur}
                                             helperText={errors.title && touched.title && <span>{errors.title}</span>}
                                             sx={{ width: "100%" }}
+                                            defaultValue={projectData?.title}
                                         >
                                         </TextField>
                                         <TextField
@@ -160,10 +174,11 @@ const FormModal = () => {
                                             error={!!errors.tags && !!touched.tags}
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                setTags(e.target.value)
+                                                setTags(mode === "edit" ? e.target.defaultValue : e.target.value)
                                             }}
                                             onBlur={handleBlur}
                                             helperText={errors.tags && touched.tags && <span>{errors.tags}</span>}
+                                            defaultValue={projectData?.tags}
                                         >
                                         </TextField>
                                         <TextField
@@ -173,10 +188,11 @@ const FormModal = () => {
                                             error={!!errors.link && !!touched.link}
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                setLink(e.target.value)
+                                                setLink(mode === "edit" ? e.target.defaultValue : e.target.value)
                                             }}
                                             onBlur={handleBlur}
                                             helperText={errors.link && touched.link && <span>{errors.link}</span>}
+                                            defaultValue={projectData?.link}
                                         >
                                         </TextField>
                                         <TextField
@@ -187,12 +203,13 @@ const FormModal = () => {
                                             error={!!errors.description && !!touched.description}
                                             onChange={(e) => {
                                                 handleChange(e);
-                                                setDescription(e.target.value)
+                                                setDescription(mode === "edit" ? e.target.defaultValue : e.target.value)
                                             }}
                                             onBlur={handleBlur}
                                             helperText={errors.description && touched.description && <span>{errors.description}</span>}
                                             multiline
                                             rows={4}
+                                            defaultValue={projectData?.description}
                                         />
                                     </Box>
                                 </Box>

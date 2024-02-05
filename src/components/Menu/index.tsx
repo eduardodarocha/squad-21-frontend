@@ -26,7 +26,7 @@ const pages = [
   },
   {
     labal: 'Descobrir',
-    to: '/Descobrir'
+    to: '/descobrir'
   },
 ];
 
@@ -88,7 +88,7 @@ function MenuBar() {
             }}
           >
             <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, gap: '100px' }}>
-              <img src="../assets/images/logo_orange.png" alt="Logo da orange" />
+              <img src="../assets/images/logo_orange.png" alt="Logo da orange"/>
             </Box>
           </Typography>
 
@@ -176,7 +176,7 @@ function MenuBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title={`Olá ${auth.name}`}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="../assets/images/avatar.png"/>
+                <Avatar alt="Remy Sharp" src="../assets/images/avatar.png" sx={{backgroundColor: "#fff"}}/>
               </IconButton>
             </Tooltip>
             <IconButton

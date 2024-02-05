@@ -99,11 +99,12 @@ const CardRenderProjeto = (data: ProjectProps) => {
                     gap: '8px',
                     '@media (max-width: 800px)': {
                         maxWidth: "312px",
-                    }
+                    },
+
                 }}
             >
 
-                <img src={data.image} onClick={handleOpenProject} />
+                <img src={data.image} onClick={handleOpenProject} style={{height: "258px", width: isMobile ? "312px": "389px", margin: "0 auto", backgroundColor: "#f0f0f0"}}/>
                 <CardContent sx={{ display: "flex", padding: 0, justifyContent: "space-between" }}>
                     <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
                         <Avatar sx={{ width: "24px", height: "24px" }} alt="Avatar" src="./assets/images/avatar.png" />
