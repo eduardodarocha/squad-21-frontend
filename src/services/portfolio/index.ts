@@ -27,3 +27,8 @@ export const ListSingleProject = async (id: string): Promise<ProjectData> => {
   const response = await Api.get(`projects/by-project/${id}`);
   return response.data;
 };
+
+export const DeleteProject = async (id: string): Promise<AxiosResponse> => {
+  const response = await Api.delete(`projects/${id}`);
+  return response.data;
+};

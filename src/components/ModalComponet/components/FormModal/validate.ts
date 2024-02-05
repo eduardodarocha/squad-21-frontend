@@ -1,4 +1,4 @@
-import {object, string} from "yup";
+import {array, object, string} from "yup";
 
 const validateForm = object().shape({
     title: string().required("Este campo é obrigatório"),

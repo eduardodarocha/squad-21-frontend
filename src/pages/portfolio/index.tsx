@@ -8,11 +8,14 @@ import { useContext, useState, useEffect } from "react";
 import ModalComponent from "../../components/ModalComponet";
 import FormModal from "../../components/ModalComponet/components/FormModal";
 import ModalControllerContext, { } from "../../providers/modalController";
-import { ListProjects } from "../../services/portfolio";
+import { DeleteProject, ListProjects } from "../../services/portfolio";
 import { useAuth } from "../../providers/AuthProvider/useAuth";
 import { ProjectData } from "../../services/portfolio/types";
 import { formatMonthYear } from "../../utils";
 import AlertComponent from "../../components/Alert";
+import MessageModal from "../../components/ModalComponet/components/MessageModal";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import theme from "../../theme";
 
 const Portfolio = () => {
     const [projects, setProjects] = useState<ProjectData[]>([]);
@@ -20,7 +23,37 @@ const Portfolio = () => {
     const { isOpen, toggle } = useContext(ModalControllerContext);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
     const [searchTags, setSearchTags] = useState("");
+    const [setting, setSetting] = useState<string | null>(null);
+    const [id, setId] = useState("");
+    const [confirmDeleted, setConfirmDeleted] = useState(false);
+    const [action, setAction] = useState(true);
+
     const auth = useAuth();
+
+    const handleSettingChange = async (newSetting: string, id: string) => {
+        setSetting(newSetting);
+        setId(id);
+    };
+
+    useEffect(() => {
+        setConfirmDeleted(true);
+    }, [setting, id])
+
+
+    const handleExcludAction = async () => {
+        try {
+            if (action) {
+                const response = await DeleteProject(id);
+                setConfirmDeleted(false);
+            }
+        } catch (error) {
+            setHasError(true);
+        }
+    };
+
+    const handleCancelAction = async () => {
+        setConfirmDeleted(false);
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -58,11 +91,16 @@ const Portfolio = () => {
         };
 
         fetchProjectsData();
-    }, [auth.id, searchTags]);
+    }, [auth.id, searchTags, confirmDeleted]);
 
     return (
         <>
             <MenuBar />
+
+            {confirmDeleted && setting === "Excluir" && (<ModalComponent open={confirmDeleted} onClose={() => setConfirmDeleted(false)} width="300px" bottom={300}>
+                <MessageModal action="Deseja Excluir?" title="Se você prosseguir irá excluir o projeto do seu portfólio" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} onConfirm={() => handleExcludAction()} onCancel={() => handleCancelAction()} hasAction />
+            </ModalComponent>)}
+
             <ModalComponent open={isOpen} onClose={toggle} children={<FormModal />} width={isMobile ? 'auto' : '800px'} height="420px" bottom={isMobile ? 0 : 160} />
             {hasError && (
                 <AlertComponent
@@ -77,6 +115,7 @@ const Portfolio = () => {
                 },
             }}>
                 <CardUser />
+
                 <Box sx={{
                     display: 'flex', flexDirection: "column", gap: "40px", marginLeft: "32px",
                     '@media (max-width: 800px)': {
@@ -98,6 +137,7 @@ const Portfolio = () => {
                                     tags={item.tags}
                                     hasMenu
                                     hasTags
+                                    onSettingChange={handleSettingChange}
                                 />
                             )
                         }
