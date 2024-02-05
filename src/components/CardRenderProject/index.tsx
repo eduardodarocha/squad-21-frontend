@@ -24,8 +24,12 @@ const CardRenderProjeto = (data: ProjectProps) => {
         setAnchorElUser(event.currentTarget);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = async (action: any, id: string) => {
         setAnchorElUser(null);
+
+        if (action && data.onSettingChange) {
+            data.onSettingChange(action, id);
+        }
     };
 
     const handleOpenProject = async () => {
@@ -86,6 +90,7 @@ const CardRenderProjeto = (data: ProjectProps) => {
                     display: 'flex',
                     border: "none",
                     flexDirection: "column",
+                    cursor: "pointer",
                     borderRadius: "4px",
                     fontFamily: "Roboto",
                     width: "100%",
@@ -96,10 +101,9 @@ const CardRenderProjeto = (data: ProjectProps) => {
                         maxWidth: "312px",
                     }
                 }}
-                onClick={handleOpenProject}
             >
 
-                <img src={data.image} />
+                <img src={data.image} onClick={handleOpenProject} />
                 <CardContent sx={{ display: "flex", padding: 0, justifyContent: "space-between" }}>
                     <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
                         <Avatar sx={{ width: "24px", height: "24px" }} alt="Avatar" src="./assets/images/avatar.png" />
@@ -190,7 +194,7 @@ const CardRenderProjeto = (data: ProjectProps) => {
                                 <MenuItem
                                     sx={{ '&:hover': { backgroundColor: '#FFEECC', }, }}
                                     key={setting}
-                                    onClick={handleCloseUserMenu}>
+                                    onClick={() => handleCloseUserMenu(setting, data.id)}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}

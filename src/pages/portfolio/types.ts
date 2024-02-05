@@ -10,4 +10,5 @@ export interface ProjectProps{
     tags: string;
     hasMenu?: boolean;
     hasTags?: boolean;
+    onSettingChange?: (newSetting: string, id: string) => void;
 }

@@ -2,8 +2,9 @@ import { Box, Button, Typography } from "@mui/material";
 import { MessageModalProps } from "./types";
 import { useContext } from "react";
 import ModalControllerContext from "../../../../providers/modalController";
+import theme from "../../../../theme";
 
-const MessageModal = ({ title, icon }: MessageModalProps) => {
+const MessageModal = ({ title, action, icon, hasAction, onConfirm, onCancel }: MessageModalProps) => {
     const { toggle } = useContext(ModalControllerContext);
 
     return (
@@ -17,9 +18,30 @@ const MessageModal = ({ title, icon }: MessageModalProps) => {
                 alignItems: "center",
                 justifyContent: "Center"
             }}>
+            {action && <Typography sx={{ color: "#000", textAlign: "center" }}>{action}</Typography>}
             <Typography sx={{ color: "#000", textAlign: "center" }}>{title}</Typography>
-            {icon}
-            <Button id="button" type="submit" variant="contained" size="large" color="primary" onClick={toggle}>VOLTAR PARA PROJETOS</Button>
+            {!action && icon}
+            {hasAction ? (<Box sx={{ display: "flex", gap: "24px" }}>
+                <Button onClick={() => {
+                    if (onConfirm) {
+                        onConfirm();
+                    }
+                }} variant="contained" color="primary">Excluir</Button>
+                <Button variant="contained" sx={{
+                    backgroundColor: theme.palette.grey[50],
+                    color: theme.palette.grey[100],
+                    '&:hover': {
+                        backgroundColor: theme.palette.grey[200],
+                    },
+                }}
+                    onClick={() => {
+                        if (onCancel) {
+                            onCancel();
+                        }
+                    }}
+                >Cancelar</Button>
+            </Box>) : <Button id="button" type="submit" variant="contained" size="large" color="primary" onClick={toggle}>VOLTAR PARA PROJETOS</Button>}
+
         </Box>
     )
 }

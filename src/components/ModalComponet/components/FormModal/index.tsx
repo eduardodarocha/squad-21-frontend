@@ -82,10 +82,10 @@ const FormModal = () => {
                 {({ errors, touched, handleBlur, handleChange }) => {
                     return (
                         <Form>
-                            {isSaved && <ModalComponent open={isOpen} onClose={toggle} width="300px">
+                            {isSaved && <ModalComponent open={isOpen} onClose={toggle} width="300px" bottom={300}>
                                 <MessageModal title="Projeto adicionado com sucesso!" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} />
                             </ModalComponent>}
-                            {error && <ModalComponent open={isOpen} onClose={toggle} width="300px">
+                            {error && <ModalComponent open={error} onClose={() => setError(false)} width="300px" bottom={300}>
                                 <MessageModal title="Erro ao adicionar projeto!" icon={<Close sx={{ color: theme.palette.error.main }} />} />
                             </ModalComponent>}
                             {isPreviewContent &&
