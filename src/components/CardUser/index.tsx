@@ -4,7 +4,7 @@ import ModalControllerContext from "../../providers/modalController";
 import { useAuth } from "../../providers/AuthProvider/useAuth";
 
 const CardUser = () => {
-    const { isOpen, toggle } = useContext(ModalControllerContext);
+    const { toggle } = useContext(ModalControllerContext);
     const auth = useAuth();
     return (
 
@@ -22,7 +22,7 @@ const CardUser = () => {
                 <CardMedia
                     component="img"
                     sx={{ width: 122, borderRadius: 50 }}
-                    image="../assets/images/avatar122.png"
+                    image="../assets/images/avatar.png"
                     alt="Avatar ou imagem do perfil"
                 />
                 <Box sx={{

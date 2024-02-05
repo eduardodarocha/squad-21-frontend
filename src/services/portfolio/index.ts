@@ -23,3 +23,7 @@ export const ListProjects = async (tag?: string): Promise<ProjectData[]> => {
   return response.data;
 };
 
+export const ListSingleProject = async (id: string): Promise<ProjectData> => {
+  const response = await Api.get(`projects/by-project/${id}`);
+  return response.data;
+};

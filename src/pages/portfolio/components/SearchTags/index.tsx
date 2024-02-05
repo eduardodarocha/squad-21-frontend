@@ -26,7 +26,7 @@ const SearchTags = ({ onSelectChange }: { onSelectChange: (value: string) => voi
         }}>
             Meus Projetos
         </Typography>
-        <SelectLabels onSelectChange={handleSelectChange}/>
+        <SelectLabels onSelectChange={handleSelectChange} />
     </Box>
 }
 
