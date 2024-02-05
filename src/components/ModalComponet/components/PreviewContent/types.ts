@@ -4,8 +4,9 @@ export interface PreviewContentProps {
     avatar: string;
     date: string;
     tags: string;
-    image: File | null | undefined;
+    image: any;
     description: string;
     url: string;
     width?: string;
+    isSaved?: boolean;
 }

@@ -9,10 +9,11 @@ import ModalControllerContext from "../../../../providers/modalController";
 import MessageModal from "../MessageModal";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PreviewContent from "../PreviewContent";
-import { projectsData } from "../../../CardRenderProject/projectData";
 import { ImageControllerContext } from "../../../../providers/imageController";
 import { RegisterProjects } from "../../../../services/portfolio";
-import { Close, StopCircle } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
+import { useAuth } from "../../../../providers/AuthProvider/useAuth";
+import { formatMonthYear } from "../../../../utils";
 
 const FormModal = () => {
     const { toggle, isOpen } = useContext(ModalControllerContext);
@@ -25,6 +26,8 @@ const FormModal = () => {
     const [link, setLink] = useState("");
     const [description, setDescription] = useState("");
     const { image } = useContext(ImageControllerContext);
+    const auth = useAuth();
+    const currentDate = new Date();
 
     useEffect(() => {
         const handleResize = () => {
@@ -66,7 +69,6 @@ const FormModal = () => {
             } catch (error) {
                 setError(true);
             }
-        } else {
         }
     };
 
@@ -87,14 +89,14 @@ const FormModal = () => {
                                 <MessageModal title="Erro ao adicionar projeto!" icon={<Close sx={{ color: theme.palette.error.main }} />} />
                             </ModalComponent>}
                             {isPreviewContent &&
-                                <ModalComponent open={isOpen} onClose={toggle} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={0} hasCloseButton hasBorderRadius>
+                                <ModalComponent open={isOpen} onClose={toggle} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={isMobile ? 0 : 40} hasCloseButton hasBorderRadius>
                                     <Box>
-                                        {projectsData.length > 0 && (
+                                        {auth.name && (
                                             <PreviewContent
                                                 title={title}
-                                                avatar={projectsData[0].avatar}
-                                                author={projectsData[0].author}
-                                                date={projectsData[0].date}
+                                                avatar={""}
+                                                author={auth.name}
+                                                date={formatMonthYear(currentDate.toString())}
                                                 image={image}
                                                 description={description!}
                                                 url={link}
@@ -103,8 +105,6 @@ const FormModal = () => {
                                             />
                                         )}
                                     </Box>
-
-
                                 </ModalComponent>}
                             <Box sx={{
                                 display: "flex",

@@ -30,7 +30,6 @@ const pages = [
   },
 ];
 
-/*const pages = ['Meus projetos', 'Descobrir', 'Configurações'];*/
 const settings = ['Sair'];
 
 function MenuBar() {
@@ -177,7 +176,7 @@ function MenuBar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title={`Olá ${auth.name}`}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="../assets/images/avatar40.png" />
+                <Avatar alt="Remy Sharp" src="../assets/images/avatar.png"/>
               </IconButton>
             </Tooltip>
             <IconButton

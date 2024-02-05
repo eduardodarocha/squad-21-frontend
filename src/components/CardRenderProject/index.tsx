@@ -1,22 +1,84 @@
 import { Edit } from "@mui/icons-material"
 import { Avatar, Badge, Box, Card, CardContent, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material"
 import { ProjectProps } from "../../pages/portfolio/types";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ListSingleProject } from "../../services/portfolio";
+import { ProjectData } from "../../services/discover/types";
+import ModalComponent from "../ModalComponet";
+import ModalControllerContext from "../../providers/modalController";
+import PreviewContent from "../ModalComponet/components/PreviewContent";
+import { formatMonthYear } from "../../utils";
+import AlertComponent from "../Alert";
 
 const settings = ['Editar', 'Excluir'];
 
 const CardRenderProjeto = (data: ProjectProps) => {
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const [projects, setProjects] = useState<ProjectData>();
+    const [hasError, setHasError] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
+    const { isOpen, toggle } = useContext(ModalControllerContext);
+    const [isPreviewContent, setPreviewContent] = useState(false);
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
+
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
 
+    const handleOpenProject = async () => {
+        try {
+            setPreviewContent(true);
+            toggle();
+            const response = await ListSingleProject(data.id);
+            setProjects(response);
+
+        } catch (error) {
+            setHasError(true);
+        }
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 800);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <Box sx={{ display: "flex" }}>
+            {isPreviewContent &&
+                <ModalComponent open={isOpen} onClose={toggle} width={isMobile ? '82%' : '1042px'} height={isMobile ? "420px" : "680px"} bottom={isMobile ? 0 : 30} hasCloseButton hasBorderRadius>
+                    <Box>
+                        {projects && (
+                            <PreviewContent
+                                title={projects?.title}
+                                avatar={""}
+                                author={projects.user_name}
+                                date={formatMonthYear(projects.created_at)}
+                                image={projects.image_url}
+                                description={projects.description}
+                                url={projects.image_url}
+                                tags={projects.tags}
+                                width={isMobile ? '308px' : '838px'}
+                                isSaved
+                            />
+                        )}
+                        {hasError && (
+                            <AlertComponent
+                                severity="error"
+                                title="Erro ao carregar projeto"
+                            />
+                        )}
+                    </Box>
+                </ModalComponent>}
             <Card
                 variant="outlined"
                 sx={{
@@ -33,7 +95,9 @@ const CardRenderProjeto = (data: ProjectProps) => {
                     '@media (max-width: 800px)': {
                         maxWidth: "312px",
                     }
-                }}>
+                }}
+                onClick={handleOpenProject}
+            >
 
                 <img src={data.image} />
                 <CardContent sx={{ display: "flex", padding: 0, justifyContent: "space-between" }}>

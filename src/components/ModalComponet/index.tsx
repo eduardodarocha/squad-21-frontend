@@ -1,4 +1,4 @@
-import { Box, Button, Modal } from "@mui/material"
+import { Box, Modal } from "@mui/material"
 import { ModalComponentProps } from "./types";
 import { Close } from "@mui/icons-material";
 import { useContext } from "react";

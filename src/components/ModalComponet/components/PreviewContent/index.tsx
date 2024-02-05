@@ -5,7 +5,7 @@ import { PreviewContentProps } from "./types";
 
 const PreviewContent = (data: PreviewContentProps) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
-    const { title, author, avatar, date, description, image, tags, url, width } = data;
+    const { title, author, date, description, image, tags, url, width, isSaved } = data;
 
     useEffect(() => {
         const handleResize = () => {
@@ -21,7 +21,7 @@ const PreviewContent = (data: PreviewContentProps) => {
 
     return (
         <Box sx={{
-            display: "flex", flexDirection: "column", gap: "32px", width: { width }, margin: "auto",
+            display: "flex", flexDirection: "column", gap: "32px", width: { width }, margin: "auto", cursor: "pointer",
             '@media (max-width: 800px)': {
                 maxWidth: "360px",
             }
@@ -33,12 +33,12 @@ const PreviewContent = (data: PreviewContentProps) => {
                     maxWidth: "312px",
                     height: "258px"
                 }}>
-                    {image && <img src={URL.createObjectURL(image)} style={{ width: "100%", height: "100%" }} />}
+                    {image && <img src={isSaved ? image : URL.createObjectURL(image)} style={{ width: "100%", height: "100%" }} />}
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Box sx={{ display: "flex", gap: "8px" }}>
                         <Box sx={{ borderRadius: "50%" }}>
-                            <img src={avatar} alt="Avatar" style={{ borderRadius: "50%" }} />
+                            <img src="../assets/images/avatar.png" alt="Avatar" style={{ borderRadius: "50%", width: "40px" }} />
                         </Box>
                         <Box sx={{ display: "flex", flexDirection: "column" }}>
                             <Typography sx={{ fontFamily: "Roboto", fontSize: "16px" }}>{author}</Typography>
@@ -67,7 +67,7 @@ const PreviewContent = (data: PreviewContentProps) => {
                         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                             <Box sx={{ display: "flex", gap: "8px" }}>
                                 <Box sx={{ borderRadius: "50%" }}>
-                                    <img src={avatar} alt="Avatar" style={{ borderRadius: "50%" }} />
+                                    <img src="../assets/images/avatar.png" alt="Avatar" style={{ borderRadius: "50%", width: "40px" }} />
                                 </Box>
                                 <Box sx={{ display: "flex", flexDirection: "column" }}>
                                     <Typography sx={{ fontFamily: "Roboto", fontSize: "16px" }}>{author}</Typography>
@@ -93,7 +93,7 @@ const PreviewContent = (data: PreviewContentProps) => {
                             maxWidth: "838px",
                             height: "558px",
                         }}>
-                            {image && <img src={URL.createObjectURL(image)} style={{ width: "100%", height: "100%" }} />}
+                            {image && <img src={isSaved ? image : URL.createObjectURL(image)} style={{ width: "100%", height: "100%" }} />}
                         </Box>
                     </>
                 )}

@@ -11,13 +11,12 @@ import ModalControllerContext, { } from "../../providers/modalController";
 import { ListProjects } from "../../services/portfolio";
 import { useAuth } from "../../providers/AuthProvider/useAuth";
 import { ProjectData } from "../../services/portfolio/types";
-import MessageModal from "../../components/ModalComponet/components/MessageModal";
-import { Close } from "@mui/icons-material";
-import theme from "../../theme";
+import { formatMonthYear } from "../../utils";
+import AlertComponent from "../../components/Alert";
 
 const Portfolio = () => {
     const [projects, setProjects] = useState<ProjectData[]>([]);
-    const [error, setError] = useState(false);
+    const [hasError, setHasError] = useState(false);
     const { isOpen, toggle } = useContext(ModalControllerContext);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
     const [searchTags, setSearchTags] = useState("");
@@ -34,15 +33,6 @@ const Portfolio = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
-    const formatMonthYear = (dateString: string): string => {
-        const dateObject = new Date(dateString);
-
-        const month = (dateObject.getUTCMonth() + 1).toString().padStart(2, '0');
-        const year = dateObject.getUTCFullYear();
-
-        return `${month}/${year}`;
-    };
 
     const handleSearchTagsChange = (selectedTags: string) => {
         setSearchTags(selectedTags);
@@ -63,7 +53,7 @@ const Portfolio = () => {
                     }
                 }
             } catch (error) {
-                setError(true);
+                setHasError(true);
             }
         };
 
@@ -73,10 +63,13 @@ const Portfolio = () => {
     return (
         <>
             <MenuBar />
-            <ModalComponent open={isOpen} onClose={toggle} children={<FormModal />} width={isMobile ? 'auto' : '800px'} height="420px" bottom={0} />
-            {error && <ModalComponent open={isOpen} onClose={toggle} width="300px">
-                <MessageModal title="Erro ao carregar projetos, tente novamente mais tarde!" icon={<Close sx={{ color: theme.palette.error.main }} />} />
-            </ModalComponent>}
+            <ModalComponent open={isOpen} onClose={toggle} children={<FormModal />} width={isMobile ? 'auto' : '800px'} height="420px" bottom={isMobile ? 0 : 160} />
+            {hasError && (
+                <AlertComponent
+                    severity="error"
+                    title="Erro ao carregar projetos"
+                />
+            )}
             <Box sx={{
                 display: 'flex', flexDirection: "column", width: "100%", maxWidth: "1280px", margin: "112px auto",
                 '@media (max-width: 800px)': {
@@ -97,6 +90,7 @@ const Portfolio = () => {
                             projects.map((item, index) =>
                                 <CardRenderProjeto
                                     key={index}
+                                    id={item.id}
                                     avatar={""}
                                     author={item.user_name}
                                     image={item.image_url}
