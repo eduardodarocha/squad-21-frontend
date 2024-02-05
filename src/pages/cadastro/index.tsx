@@ -6,7 +6,6 @@ import "./styles.css";
 import createNewAccount from "./validate";
 import "../../components/LoginRegisterCss/export";
 import AlertComponent from "../../components/Alert";
-// import api from "../../api/api";
 import { Api } from "../../services/api";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -16,12 +15,14 @@ const Cadastro = () => {
   const [isActionSuccessful, setIsActionSuccessful] = useState<boolean | null>(null);
   const [messageError, setMessageError] = useState("");
   const [user, setUser] = useState();
+
   const initialValues = {
     name: "",
     lastname: "",
     email: "",
     password: "",
   };
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
@@ -39,17 +40,6 @@ const Cadastro = () => {
       setIsActionSuccessful(null)
       setMessageError(error.response.data.message);
     }
-    // api
-    //   .post("/users", values)
-    //   .then((response) => {
-    //     setUser(response.data);
-    //     setIsActionSuccessful(true);
-    //     setMessageError("");
-    //   })
-    //   .catch((error) => {
-    //     setIsActionSuccessful(null)
-    //     setMessageError(error.response.data.message);
-    //   });
   }
 
   return (
@@ -95,7 +85,7 @@ const Cadastro = () => {
                 onSubmit={formik.handleSubmit}
               >
                 <h3 className="h3">Cadastre-se</h3>
-                <Box className="nameSurname">
+                <Box className="nameLastname">
                   <TextField
                     label="Nome"
                     name="name"
@@ -105,7 +95,7 @@ const Cadastro = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
-                    helperText={errors.name && touched.name && <span>{ }</span>}
+                    helperText={errors.name && touched.name && <span>{errors.name}</span>}
                   ></TextField>
 
                   <TextField
@@ -118,7 +108,7 @@ const Cadastro = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.lastname}
                     helperText={
-                      errors.lastname && touched.lastname && <span>{ }</span>
+                      errors.lastname && touched.lastname && <span>{errors.lastname}</span>
                     }
                   ></TextField>
                 </Box>
@@ -133,6 +123,9 @@ const Cadastro = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
+                    helperText={
+                        errors.email && touched.email && <span>{errors.email}</span>
+                      }
                   ></TextField>
 
                   <TextField
@@ -155,7 +148,7 @@ const Cadastro = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.password}
                     helperText={
-                      errors.password && touched.password && <span>{ }</span>
+                      errors.password && touched.password && <span>{errors.password}</span>
                     }
                   ></TextField>
                 </Box>

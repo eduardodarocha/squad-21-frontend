@@ -95,12 +95,12 @@ git clone https://github.com/eduardodarocha/squad-21-frontend.git
 
 cd squad-21-frontend
 
-yarn install
+npm install
 
-yarn dev
+npm start
 ````
 
-### 👨🏻‍💻 Idealizadores
+### 👨🏻‍💻 Desenvolvedores
 
 * Bruna Furtado, [BruFurtado](https://github.com/BruFurtado)
 * Eduardo da Rocha, [eduardodarocha](https://github.com/eduardodarocha)
