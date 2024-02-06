@@ -6,6 +6,7 @@ import { useAuth } from "../../providers/AuthProvider/useAuth";
 const CardUser = () => {
     const { toggle } = useContext(ModalControllerContext);
     const auth = useAuth();
+
     return (
 
         <Box sx={{ display: 'flex', justifyContent: "center" }}>

@@ -32,3 +32,15 @@ export const DeleteProject = async (id: string): Promise<AxiosResponse> => {
   const response = await Api.delete(`projects/${id}`);
   return response.data;
 };
+
+export const UpdateProjects = async (
+  formData: FormData,
+  id: string
+): Promise<AxiosResponse> => {
+  return await Api.put(`projects/${id}`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+};

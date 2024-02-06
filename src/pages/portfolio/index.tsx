@@ -8,7 +8,7 @@ import { useContext, useState, useEffect } from "react";
 import ModalComponent from "../../components/ModalComponet";
 import FormModal from "../../components/ModalComponet/components/FormModal";
 import ModalControllerContext, { } from "../../providers/modalController";
-import { DeleteProject, ListProjects } from "../../services/portfolio";
+import { DeleteProject, ListProjects, ListSingleProject } from "../../services/portfolio";
 import { useAuth } from "../../providers/AuthProvider/useAuth";
 import { ProjectData } from "../../services/portfolio/types";
 import { formatMonthYear } from "../../utils";
@@ -27,12 +27,26 @@ const Portfolio = () => {
     const [id, setId] = useState("");
     const [confirmDeleted, setConfirmDeleted] = useState(false);
     const [action, setAction] = useState(true);
+    const [projectData, setProjectData] = useState<ProjectData>();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     const auth = useAuth();
 
     const handleSettingChange = async (newSetting: string, id: string) => {
         setSetting(newSetting);
         setId(id);
+
+        if (newSetting === "Editar") {
+            SearchProject(id);
+        }
     };
 
     useEffect(() => {
@@ -93,6 +107,19 @@ const Portfolio = () => {
         fetchProjectsData();
     }, [auth.id, searchTags, confirmDeleted]);
 
+    const SearchProject = async (id: string) => {
+        try {
+            if (id) {
+                const response = await ListSingleProject(id);
+                if (response) {
+                    setProjectData(response);
+                }
+            }
+        } catch (error) {
+            setHasError(true);
+        }
+    };
+
     return (
         <>
             <MenuBar />
@@ -101,7 +128,8 @@ const Portfolio = () => {
                 <MessageModal action="Deseja Excluir?" title="Se você prosseguir irá excluir o projeto do seu portfólio" icon={<CheckCircleIcon sx={{ color: theme.palette.success.main }} />} onConfirm={() => handleExcludAction()} onCancel={() => handleCancelAction()} hasAction />
             </ModalComponent>)}
 
-            <ModalComponent open={isOpen} onClose={toggle} children={<FormModal />} width={isMobile ? 'auto' : '800px'} height="420px" bottom={isMobile ? 0 : 160} />
+            <ModalComponent open={isOpen} onClose={toggle} children={<FormModal mode="create" />} width={isMobile ? 'auto' : '800px'} height="420px" bottom={isMobile ? 0 : 160} />
+            <ModalComponent open={setting === "Editar" && projectData?.id !== undefined} onClose={toggle} children={<FormModal mode="edit" projectData={projectData} id={id} />} width={isMobile ? 'auto' : '800px'} height="420px" bottom={isMobile ? 0 : 160} />
             {hasError && (
                 <AlertComponent
                     severity="error"
